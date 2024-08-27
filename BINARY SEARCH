@@ -2,26 +2,25 @@
 #include <iostream>
 using namespace std;
 
-void binarySearch(int arr[], int low, int high, int key, int pass) {
-    if (low > high) {
+void binarySearch(int arr[], int l, int h, int key, int pass) {
+    if (l > h) {
         cout << "Key not found in the array." << endl;
         return;
     }
 
-    int mid = (low + high) / 2;
+    int mid = (l + h) / 2;
 
-    // Print the current pass information
-    cout << "Pass " << pass << ": Low = " << low << ", High = " << high << ", Mid = " << mid << endl;
+    cout << "Pass " << pass << ": Low = " << l << ", High = " << h << ", Mid = " << mid << endl;
 
     if (arr[mid] == key) {
         cout << "Key found at index " << mid << " in pass " << pass << "." << endl;
         return;
     }
     else if (arr[mid] > key) {
-        binarySearch(arr, low, mid - 1, key, pass + 1);
+        binarySearch(arr, l, mid - 1, key, pass + 1);
     }
     else {
-        binarySearch(arr, mid + 1, high, key, pass + 1);
+        binarySearch(arr, mid + 1, h, key, pass + 1);
     }
 }
 
