@@ -20,7 +20,7 @@ int root(int x)
     }    
     return x;    
 }      
-void union(int x, int y)    
+void union1(int x, int y)    
 {    
     int p = root(x);    
     int q = root(y);    
