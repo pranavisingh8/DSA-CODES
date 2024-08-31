@@ -53,7 +53,6 @@ int main()
     int n;
     cout << "Enter the number of vertices in the graph: ";
     cin >> n;
-
     int graph[Ve][Ve];
     cout << "Enter the adjacency matrix (enter 0 if there is no direct edge):\n";
     for (int i = 0; i < n; i++){
