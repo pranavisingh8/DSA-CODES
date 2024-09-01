@@ -53,7 +53,7 @@ int main()
     for(int i = 0;i < edges;++i)    
     {    
         cout<<"Enter the value of X, Y and edges";    
-    cin >> x >> y >> weight;    
+        cin >> x >> y >> weight;    
         p[i] = make_pair(weight, make_pair(x, y));    
     }    
     sort(p, p + edges);    
