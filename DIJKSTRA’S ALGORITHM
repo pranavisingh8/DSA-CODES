@@ -36,13 +36,13 @@ void dijkstra(int graph[mv][mv], int source, int n) {
     dist[source] = 0;  // Distance from the source to itself is 0
 
     for (int count = 0; count < n - 1; count++) {
-        int u = findMinDistance(dist, p, n); // Find the vertex with the minimum distance
+        int u = findMinDistance(dist, p, n); 
         p[u] = true;  // Mark the vertex as processed
 
         for (int v = 0; v < n; v++)
             if (!p[v] && graph[u][v] && dist[u] != INT_MAX
                 && dist[u] + graph[u][v] < dist[v])
-                dist[v] = dist[u] + graph[u][v];  // Update the distance if a shorter path is found
+                dist[v] = dist[u] + graph[u][v];  
     }
 
     printDistances(dist, n);  
