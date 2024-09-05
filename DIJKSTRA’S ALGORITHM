@@ -45,7 +45,7 @@ void dijkstra(int graph[mv][mv], int source, int n) {
                 dist[v] = dist[u] + graph[u][v];  // Update the distance if a shorter path is found
     }
 
-    printDistances(dist, n);  // Print the final distances from the source
+    printDistances(dist, n);  
 }
 
 int main() {
