@@ -1,6 +1,7 @@
 ## Binary search recursive with passes:
 #include <iostream>
 using namespace std;
+
 void binarySearch(int arr[], int l, int h, int key, int pass) {
     if (l > h) {
         cout << "Key not found in the array." << endl;
