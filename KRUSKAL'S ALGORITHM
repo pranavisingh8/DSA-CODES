@@ -1,8 +1,8 @@
 ## Kruskal's Algorithm:
-
 #include <iostream>    
 #include <algorithm>    
-using namespace std;    
+using namespace std; 
+
 const int MAX = 100;    
 int d[MAX], nodes, edges;    
 pair <long long, pair<int, int> > p[MAX];    
