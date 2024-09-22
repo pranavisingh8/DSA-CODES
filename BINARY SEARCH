@@ -7,7 +7,7 @@ void binarySearch(int arr[], int l, int h, int key, int pass) {
         cout << "Key not found in the array." << endl;
         return;
     }
-\
+
     int mid = (l + h) / 2;
 
     cout << "Pass " << pass << ": Low = " << l << ", High = " << h << ", Mid = " << mid << endl;
