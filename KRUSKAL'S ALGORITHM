@@ -1,4 +1,4 @@
-## Kruskal's Algorithm:we
+## Kruskal's Algorithm:
 #include <iostream>    
 #include <algorithm>    
 using namespace std; 
