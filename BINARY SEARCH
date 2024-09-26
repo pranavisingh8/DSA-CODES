@@ -1,4 +1,4 @@
-## Binary search recursive with passes :yui
+## Binary search recursive with passes :yu
 #include <iostream>
 using namespace std;
 
