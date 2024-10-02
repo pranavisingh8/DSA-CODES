@@ -1,4 +1,4 @@
-## Binary search recursive with passes: 1
+## Binary search recursive with passes:
 #include <iostream>
 using namespace std;
 
