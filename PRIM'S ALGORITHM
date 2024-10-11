@@ -1,4 +1,4 @@
-## Prims Algorithm: 123456
+## Prims Algorithm: 123
 #include <bits/stdc++.h>
 using namespace std;
 #define Ve 5
