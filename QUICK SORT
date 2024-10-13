@@ -1,14 +1,11 @@
 ## QUICK SORT with partial pass-wise sorting:
-
 #include <iostream>
 using namespace std;
-
 void swap(int* a, int* b) {
     int t = *a;
     *a = *b;
     *b = t;
 }
-
 int partition(int arr[], int l, int h) {
     int pivot = arr[h];
     int i = l - 1;
