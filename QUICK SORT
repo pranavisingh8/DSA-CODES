@@ -8,6 +8,7 @@ void swap(int* a, int* b) {
     *a = *b;
     *b = t;
 }
+
 int partition(int arr[], int l, int h) {
     int pivot = arr[h];
     int i = l - 1;
