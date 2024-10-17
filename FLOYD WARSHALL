@@ -1,0 +1,62 @@
+## Floyd Warshall Algorithm:
+
+#include <iostream>
+using namespace std;
+
+const int V=4;
+const int inf=999999;
+
+void printMatrix(int graph[V][V]){
+    for(int i=0;i<V;i++){
+        for(int j=0;j<V;j++){
+            if(graph[i][j]==inf){
+                cout<<"INF"<<" ";
+            }
+            else
+            {
+                cout<<graph[i][j]<<"   ";
+            }
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
+
+void floydWarshall(int graph[V][V]){
+    int dist[V][V];
+    for(int i=0;i<V;i++){
+        for(int j=0;j<V;j++){
+            dist[i][j] = graph[i][j];
+        }
+    }
+    
+    cout<<"Initial Graph :"<<endl;
+    printMatrix(dist);
+    
+    for(int k=0;k<V;k++){
+        for(int i=0;i<V;i++){
+            for(int j=0;j<V;j++){
+                if(dist[i][k]!=inf && dist[k][j]!=inf){
+                    dist[i][j] = min(dist[i][j], dist[i][k]+dist[k][j]);
+                }
+            }
+        }
+        cout<<"Matrix M"<<k<<" (Considering vertex "<<k<<")"<<endl;
+        printMatrix(dist);
+    }
+
+    cout<<"Final Matrix :"<<endl;
+    printMatrix(dist);
+}
+
+int main(){
+    int graph[V][V] = { 
+        { 0,   3, inf, 7 },
+        { 8,   0,   2, inf },
+        { 5, inf,   0,   1 },
+        { 2, inf, inf,   0 }
+    };
+    
+    floydWarshall(graph);
+    return 0;
+}
