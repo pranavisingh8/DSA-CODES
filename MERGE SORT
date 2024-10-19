@@ -1,5 +1,5 @@
 ## Merge sort with printing of passes
-etry
+et
 #include <iostream>
 using namespace std;
 
