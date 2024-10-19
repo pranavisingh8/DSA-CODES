@@ -1,5 +1,5 @@
 ## Merge sort with printing of passes
-etryuiop
+etryui
 #include <iostream>
 using namespace std;
 
