@@ -1,5 +1,4 @@
 ## Merge sort with printing of passes
-et
 #include <iostream>
 using namespace std;
 
