@@ -8,7 +8,6 @@ void linears(int arr[], int size, int target, int index = 0) {
         return;
     }
 
-    // Check if the current element is the target
     if (arr[index] == target) {
         cout << "Element found at position " << index + 1 << endl;
         return;
