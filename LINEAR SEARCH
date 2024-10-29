@@ -13,7 +13,6 @@ void linears(int arr[], int size, int target, int index = 0) {
         return;
     }
 
-    // Recursive call to check the next element
     linears(arr, size, target, index + 1);
 }
 
