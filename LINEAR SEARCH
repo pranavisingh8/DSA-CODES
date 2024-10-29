@@ -3,7 +3,6 @@
 using namespace std;
 
 void linears(int arr[], int size, int target, int index = 0) {
-    // Base case: if index reaches size, element is not found
     if (index == size) {
         cout << "Element not found" << endl;
         return;
