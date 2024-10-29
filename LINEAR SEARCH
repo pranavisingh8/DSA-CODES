@@ -18,8 +18,6 @@ void linears(int arr[], int size, int target, int index = 0) {
 
 int main() {
     int size, target;
-
-    // Take input for array size
     cout << "Enter the size of the array: ";
     cin >> size;
 
