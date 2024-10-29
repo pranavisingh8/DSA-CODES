@@ -21,7 +21,6 @@ int main() {
     cout << "Enter the size of the array: ";
     cin >> size;
 
-    // Initialize the array
     int arr[size];
 
     cout << "Enter the elements of the array: ";
