@@ -32,7 +32,6 @@ int main() {
         cin >> arr[i];
     }
 
-    // Take input for the target element
     cout << "Enter the target element: ";
     cin >> target;
     linears(arr, size, target);
