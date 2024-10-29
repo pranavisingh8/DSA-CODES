@@ -26,7 +26,6 @@ int main() {
     // Initialize the array
     int arr[size];
 
-    // Take input for array elements
     cout << "Enter the elements of the array: ";
     for (int i = 0; i < size; i++) {
         cin >> arr[i];
