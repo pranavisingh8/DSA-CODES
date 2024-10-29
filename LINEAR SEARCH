@@ -35,8 +35,6 @@ int main() {
     // Take input for the target element
     cout << "Enter the target element: ";
     cin >> target;
-
-    // Call the linear search function
     linears(arr, size, target);
 
     return 0;
