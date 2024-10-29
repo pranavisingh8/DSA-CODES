@@ -1,1 +1,67 @@
 ## OPTIMAL MERGE PATTERN
+#include <iostream> 
+using namespace std; 
+ 
+int optmcost(int files[], int n) { 
+    int totcost = 0; 
+ 
+    for (int i = 0; i < n - 1; i++) { 
+        for (int j = i + 1; j < n; j++) { 
+            if (files[i] > files[j]) { 
+                int temp = files[i]; 
+                files[i] = files[j]; 
+                files[j] = temp; 
+            } 
+        } 
+    } 
+ 
+    while (n > 1) { 
+ 
+        int mcost = files[0] + files[1]; 
+        totcost += mcost; 
+ 
+        for (int i = 2; i < n; i++) { 
+            files[i - 1] = files[i]; 
+        } 
+ 
+        files[0] = mcost; 
+        n--; 
+ 
+        for (int i = 0; i < n - 1; i++) { 
+            for (int j = i + 1; j < n; j++) { 
+                if (files[i] > files[j]) { 
+                    int temp = files[i]; 
+                    files[i] = files[j]; 
+                    files[j] = temp; 
+                } 
+            } 
+        } 
+    } 
+ 
+    return totcost; 
+} 
+ 
+int main() { 
+    int n; 
+ 
+    cout << "Enter the number of files: "; 
+    cin >> n; 
+  
+    int files[n]; 
+ 
+    cout << "Enter the sizes of the files:\n"; 
+    for (int i = 0; i < n; i++) { 
+        cout << "File " << i + 1 << " size: "; 
+        cin >> files[i]; 
+    } 
+ 
+    cout << "\nfile sizes given are:\n"; 
+    for (int i = 0; i < n; i++) { 
+        cout << "file " << i + 1 << ": " << files[i] << " units\n"; 
+    } 
+    int result = optmcost(files, n); 
+ 
+    cout << "\nminimum cost to merge all files: " << result << " units\n"; 
+ 
+    return 0; 
+}
