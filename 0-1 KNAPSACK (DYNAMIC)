@@ -1,36 +1,56 @@
 ## 0/1 KNAPSACK (DYNAMIC)
-#include <iostream> 
-#include <vector> 
- 
-using namespace std; 
- 
-int knapsack(vector<int>& weights, vector<int>& values, int n, int capacity) { 
-     
-    vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0)); 
- 
-    for (int i = 0; i <= n; i++) { 
-        for (int w = 0; w <= capacity; w++) { 
-            if (i == 0 || w == 0) { 
-                dp[i][w] = 0; 
-            } else if (weights[i - 1] <= w) { 
-                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]); 
-            } else { 
-                dp[i][w] = dp[i - 1][w]; 
-            } 
-        } 
-    } 
- 
-    return dp[n][capacity]; 
-} 
- 
-int main() { 
-    int n = 4; 
-    vector<int> weights = {1, 2, 3, 8}; 
-    vector<int> values = {20, 5, 10, 40}; 
-    int capacity = 10; 
- 
-    int maxValue = knapsack(weights, values, n, capacity); 
-    cout << "Maximum value in 0/1 Knapsack = " << maxValue << endl; 
- 
-    return 0; 
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int knapsack(vector<int>& weights, vector<int>& values, int n, int capacity, vector<int>& selectedItems) {
+    vector<vector<int>> dp(n + 1, vector<int>(capacity + 1, 0));
+
+    
+    for (int i = 0; i <= n; i++) {
+        for (int w = 0; w <= capacity; w++) {
+            if (i == 0 || w == 0) {
+                dp[i][w] = 0;
+            } else if (weights[i - 1] <= w) {
+                dp[i][w] = max(dp[i - 1][w], dp[i - 1][w - weights[i - 1]] + values[i - 1]);
+            } else {
+                dp[i][w] = dp[i - 1][w];
+            }
+        }
+    }
+
+    // Backtrack 
+    int maxValue = dp[n][capacity];
+    int w = capacity;
+    selectedItems.resize(n, 0);
+    for (int i = n; i > 0 && maxValue > 0; i--) {
+        if (maxValue != dp[i - 1][w]) { 
+            selectedItems[i - 1] = 1; 
+            maxValue -= values[i - 1];
+            w -= weights[i - 1];
+        }
+    }
+
+    return dp[n][capacity];
+}
+
+int main() {
+    int n = 5;
+    vector<int> weights = {1, 2, 3, 8, 10};
+    vector<int> values = {20, 5, 10, 40, 20};
+    int capacity = 20;
+
+    vector<int> selectedItems;
+    int maxValue = knapsack(weights, values, n, capacity, selectedItems);
+
+    cout << "Maximum value in 0/1 Knapsack = " << maxValue << endl;
+    cout << "Selected items in binary format: ";
+    for (int i = 0; i < selectedItems.size(); i++) {
+        cout << selectedItems[i];
+        if (i < selectedItems.size() - 1) cout << ",";
+    }
+    cout << endl;
+
+    return 0;
 }
