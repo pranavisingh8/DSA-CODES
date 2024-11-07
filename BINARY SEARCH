@@ -1,4 +1,5 @@
-## Binary search recursive with passes
+## Binary search recursive with passes: bota n acada
+
 #include <iostream>
 using namespace std;
 
