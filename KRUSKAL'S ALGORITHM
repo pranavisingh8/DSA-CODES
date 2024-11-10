@@ -37,7 +37,8 @@ long long kruskal(pair<long long, pair<int, int> > p[])
         cost = p[i].first;    
         if(root(x) != root(y))    
         {    
-            mincost += cost;    
+            mincost += cost;
+            cout << x << " - " << y << " : " << cost << endl;
             union1(x, y);    
         }        
     }    
