@@ -1,7 +1,6 @@
 ## 0/1 KNAPSACK (DYNAMIC)
 #include <iostream> 
 #include <vector>
-
 using namespace std;
 
 int knapsack(vector<int>& weights, vector<int>& values, int n, int capacity, vector<int>& selectedItems) {
