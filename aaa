@@ -1,0 +1,184 @@
+// GO BACK N
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+int main() {
+    int windowSize, totalFrames, nextFrameToSend = 0, nextAckExpected = 0;
+    bool frameLost;
+    cout << "Enter the window size: ";
+    cin >> windowSize;
+    cout << "Enter the total number of frames to send: ";
+    cin >> totalFrames;
+    vector<bool> ackReceived(totalFrames, false);
+    srand(time(0)); // Seed for random number generation
+    while (nextAckExpected < totalFrames) {
+        // Send frames within the window
+        while (nextFrameToSend < nextAckExpected + windowSize && nextFrameToSend < totalFrames) {
+            cout << "Sending frame " << nextFrameToSend << endl;
+            nextFrameToSend++;
+        }
+
+        // Simulate frame loss
+        frameLost = (rand() % 2 == 0); 
+        if (frameLost) {
+            cout << "Frame " << nextAckExpected << " lost!" << endl;
+        } else {
+            cout << "ACK received for frame " << nextAckExpected << endl;
+            ackReceived[nextAckExpected] = true;
+            nextAckExpected++;
+        }
+        // Go back N if frame lost
+        if (!frameLost && nextAckExpected < totalFrames && !ackReceived[nextAckExpected]) {
+            cout << "Timeout, retransmitting from frame " << nextAckExpected << endl;
+            nextFrameToSend = nextAckExpected;
+        }
+    }
+    cout << "All frames successfully sent!" << endl;
+    return 0;
+}
+
+
+// SELECTIVE REPEAT 
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+using namespace std;
+
+int main() {
+    int windowSize, totalFrames;
+
+    cout << "Enter window size: ";
+    cin >> windowSize;
+
+    cout << "Enter number of frames to transmit: ";
+    cin >> totalFrames;
+
+    vector<int> sentFrames(totalFrames, 0);
+    vector<int> ackReceived(totalFrames, 0);
+    int nextFrameToSend = 0, nextAckExpected = 0;
+
+    srand(time(0)); // Seed for random number generation
+
+    while (nextAckExpected < totalFrames) {
+        // Send frames within the window
+        while (nextFrameToSend < totalFrames && nextFrameToSend < nextAckExpected + windowSize) {
+            if (sentFrames[nextFrameToSend] == 0) {
+                cout << "Sending frame " << nextFrameToSend << endl;
+                sentFrames[nextFrameToSend] = 1;
+            }
+            nextFrameToSend++;
+        }
+
+        // Simulate ACK reception
+        for (int i = nextAckExpected; i < nextFrameToSend; i++) {
+            if (sentFrames[i] == 1 && ackReceived[i] == 0) {
+                // Simulate ACK loss
+                if (rand() % 2 == 0) {
+                    cout << "ACK received for frame " << i << endl;
+                    ackReceived[i] = 1;
+                } else {
+                    cout << "ACK lost for frame " << i << endl;
+                }
+            }
+        }
+
+        // Move the window forward by advancing nextAckExpected
+        while (nextAckExpected < totalFrames && ackReceived[nextAckExpected] == 1) {
+            nextAckExpected++;
+        }
+
+        // Retransmit unacknowledged frames in the current window
+        for (int i = nextAckExpected; i < nextFrameToSend; i++) {
+            if (sentFrames[i] == 1 && ackReceived[i] == 0) {
+                cout << "Retransmitting frame " << i << endl;
+            }
+        }
+    }
+
+    cout << "All frames transmitted successfully." << endl;
+    return 0;
+}
+
+//bucket
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int bucket_size, output_rate, input_packet, storage = 0, time = 0;
+
+    printf("Enter bucket size: ");
+    scanf("%d", &bucket_size);
+
+    printf("Enter output rate: ");
+    scanf("%d", &output_rate);
+
+    while (1) {
+        printf("\nAt time %d\n", ++time);
+        printf("Enter incoming packet size (0 to stop): ");
+        scanf("%d", &input_packet);
+
+        if (input_packet == 0) break;
+
+        if (input_packet + storage > bucket_size) {
+            printf("Packet overflow! Dropped: %d\n", input_packet + storage - bucket_size);
+            storage = bucket_size;
+        } else {
+            storage += input_packet;
+            printf("Packet added. Current storage: %d\n", storage);
+        }
+
+        if (storage >= output_rate) {
+            storage -= output_rate;
+            printf("Sent: %d, Remaining: %d\n", output_rate, storage);
+        } else {
+            printf("Sent: %d, Remaining: %d\n", storage, 0);
+            storage = 0;
+        }
+    }
+
+    return 0;
+}
+
+//url
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string url, protocol = "", host = "", port = "", path = "";
+    cout << "Enter a URL: ";
+    cin >> url;
+
+    size_t protocol_pos = url.find("://");
+    if (protocol_pos != string::npos) {
+        protocol = url.substr(0, protocol_pos);
+        url = url.substr(protocol_pos + 3);
+    }
+
+    size_t port_pos = url.find(":");
+    size_t path_pos = url.find("/");
+
+    if (port_pos != string::npos) {
+        host = url.substr(0, port_pos);
+        if (path_pos != string::npos) {
+            port = url.substr(port_pos + 1, path_pos - port_pos - 1);
+            path = url.substr(path_pos + 1);
+        } else {
+            port = url.substr(port_pos + 1);
+        }
+    } else if (path_pos != string::npos) {
+        host = url.substr(0, path_pos);
+        path = url.substr(path_pos + 1);
+    } else {
+        host = url;
+    }
+
+    cout << "Protocol: " << protocol << endl;
+    cout << "Host/Domain: " << host << endl;
+    cout << "Port: " << port << endl;
+    cout << "Path: " << path << endl;
+
+    return 0;
+}
