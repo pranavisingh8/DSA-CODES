@@ -1,4 +1,4 @@
-## Floyd Warshall Algorithm with results as distance matrix:
+## Floyd Warshall Algorithm with results as distance matrix
 
 #include <iostream>
 using namespace std;
