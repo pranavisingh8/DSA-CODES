@@ -1,4 +1,4 @@
-## 0/1 KNAPSACK (DYNAMIC)
+## 0/1 KNAPSACK (DYNAMIC):
 #include <iostream> 
 #include <vector>
 using namespace std;
