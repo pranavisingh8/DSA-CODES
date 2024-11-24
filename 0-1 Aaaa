@@ -1,7 +1,5 @@
 
-        }
-
-        // Simulate frame loss
+        
         frameLost = (rand() % 2 == 0); 
         if (frameLost) {
             cout << "Frame " << nextAckExpected << " lost!" << endl;
