@@ -1,15 +1,6 @@
 
         
-        frameLost = (rand() % 2 == 0); 
-        if (frameLost) {
-            cout << "Frame " << nextAckExpected << " lost!" << endl;
-        } else {
-            cout << "ACK received for frame " << nextAckExpected << endl;
-            ackReceived[nextAckExpected] = true;
-            nextAckExpected++;
-        }
-        // Go back N if frame lost
-        if (!frameLost && nextAckExpected < totalFrames && !ackReceived[nextAckExpected]) {
+          if (!frameLost && nextAckExpected < totalFrames && !ackReceived[nextAckExpected]) {
             cout << "Timeout, retransmitting from frame " << nextAckExpected << endl;
             nextFrameToSend = nextAckExpected;
         }
