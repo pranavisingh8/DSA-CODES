@@ -1,15 +1,3 @@
-
-        
-          if (!frameLost && nextAckExpected < totalFrames && !ackReceived[nextAckExpected]) {
-            cout << "Timeout, retransmitting from frame " << nextAckExpected << endl;
-            nextFrameToSend = nextAckExpected;
-        }
-    }
-    cout << "All frames successfully sent!" << endl;
-    return 0;
-}
-
-
 // SELECTIVE REPEAT 
 #include <iostream>
 #include <vector>
