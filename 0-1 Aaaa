@@ -1,14 +1,3 @@
-
-
-int main() {
-    int windowSize, totalFrames;
-
-    cout << "Enter window size: ";
-    cin >> windowSize;
-
-    cout << "Enter number of frames to transmit: ";
-    cin >> totalFrames;
-
     vector<int> sentFrames(totalFrames, 0);
     vector<int> ackReceived(totalFrames, 0);
     int nextFrameToSend = 0, nextAckExpected = 0;
