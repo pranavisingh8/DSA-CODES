@@ -1,4 +1,3 @@
-    vector<int> sentFrames(totalFrames, 0);
     vector<int> ackReceived(totalFrames, 0);
     int nextFrameToSend = 0, nextAckExpected = 0;
 
