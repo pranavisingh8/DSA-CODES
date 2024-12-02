@@ -1,4 +1,4 @@
-    vector<int> ackReceived(totalFrames, 0);
+
     int nextFrameToSend = 0, nextAckExpected = 0;
 
     srand(time(0)); // Seed for random number generation
