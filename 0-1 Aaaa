@@ -1,5 +1,4 @@
 
-    srand(time(0)); // Seed for random number generation
 
     while (nextAckExpected < totalFrames) {
         // Send frames within the window
