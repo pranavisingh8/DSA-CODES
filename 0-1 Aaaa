@@ -1,6 +1,4 @@
 
-
-    while (nextAckExpected < totalFrames) {
         // Send frames within the window
         while (nextFrameToSend < totalFrames && nextFrameToSend < nextAckExpected + windowSize) {
             if (sentFrames[nextFrameToSend] == 0) {
