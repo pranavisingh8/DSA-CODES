@@ -1,4 +1,3 @@
-            if (sentFrames[nextFrameToSend] == 0) {
                 cout << "Sending frame " << nextFrameToSend << endl;
                 sentFrames[nextFrameToSend] = 1;
             }
