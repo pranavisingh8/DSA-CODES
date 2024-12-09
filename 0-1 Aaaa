@@ -1,5 +1,4 @@
-                cout << "Sending frame " << nextFrameToSend << endl;
-                sentFrames[nextFrameToSend] = 1;
+
             }
             nextFrameToSend++;
         }
