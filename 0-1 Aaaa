@@ -1,7 +1,4 @@
 
-            }
-            nextFrameToSend++;
-        }
 
         // Simulate ACK reception
         for (int i = nextAckExpected; i < nextFrameToSend; i++) {
