@@ -1,6 +1,4 @@
-
-
-        // Simulate ACK reception
+// Simulate ACK reception
         for (int i = nextAckExpected; i < nextFrameToSend; i++) {
             if (sentFrames[i] == 1 && ackReceived[i] == 0) {
                 // Simulate ACK loss
