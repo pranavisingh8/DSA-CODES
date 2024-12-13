@@ -1,6 +1,4 @@
-// Simulate ACK reception
 
-                // Simulate ACK loss
                 if (rand() % 2 == 0) {
                     cout << "ACK received for frame " << i << endl;
                     ackReceived[i] = 1;
