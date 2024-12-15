@@ -1,7 +1,4 @@
 
-                if (rand() % 2 == 0) {
-                    cout << "ACK received for frame " << i << endl;
-                    ackReceived[i] = 1;
                 } else {
                     cout << "ACK lost for frame " << i << endl;
                 }
