@@ -1,7 +1,4 @@
 
-                } else {
-                    cout << "ACK lost for frame " << i << endl;
-                }
             }
         }
 
