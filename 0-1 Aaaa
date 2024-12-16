@@ -1,7 +1,4 @@
 
-            }
-        }
-
         // Move the window forward by advancing nextAckExpected
         while (nextAckExpected < totalFrames && ackReceived[nextAckExpected] == 1) {
             nextAckExpected++;
