@@ -1,5 +1,5 @@
 
-        while (nextAckExpected < totalFrames && ackReceived[nextAckExpected] == 1) {
+        while nextAckExpected < totalFrames && ackReceived[nextAckExpected] == 1) {
             nextAckExpected++;
         }
 
