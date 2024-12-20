@@ -1,7 +1,4 @@
 
-        while nextAckExpected < totalFrames && ackReceived[nextAckExpected] == 1) {
-            nextAckExpected++;
-        }
 
         // Retransmit unacknowledged frames in the current window
         for (int i = nextAckExpected; i < nextFrameToSend; i++) {
