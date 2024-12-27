@@ -1,4 +1,4 @@
- frames in the current window
+ the current window
         for (int i = nextAckExpected; i < nextFrameToSend; i++) {
             if (sentFrames[i] == 1 && ackReceived[i] == 0) {
                 cout << "Retransmitting frame " << i << endl;
