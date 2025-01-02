@@ -1,5 +1,4 @@
 
-                cout << "Retransmitting frame " << i << endl;
             }
         }
     }
