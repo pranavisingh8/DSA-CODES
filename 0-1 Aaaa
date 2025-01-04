@@ -1,10 +1,7 @@
 
     }
 
-    cout << "All frames transmitted successfully." << endl;
-    return 0;
-}
-
+    cout << "All frames transmitted successfully." << en
 //bucket
 #include <stdio.h>
 #include <stdlib.h>
