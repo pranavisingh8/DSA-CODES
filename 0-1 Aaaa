@@ -1,6 +1,4 @@
 
-
-int main() {
     int bucket_size, output_rate, input_packet, storage = 0, time = 0;
 
     printf("Enter bucket size: ");
