@@ -1,9 +1,5 @@
 
-    printf("Enter bucket size: ");
-    scanf("%d", &bucket_size);
-
-    printf("Enter output rate: ");
-    scanf("%d", &output_rate);
+    printf("Enter bucket size: 
 
     while (1) {
         printf("\nAt time %d\n", ++time);
