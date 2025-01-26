@@ -1,7 +1,4 @@
 
-    printf("Enter bucket size: 
-
-    while (1) {
         printf("\nAt time %d\n", ++time);
         printf("Enter incoming packet size (0 to stop): ");
         scanf("%d", &input_packet);
