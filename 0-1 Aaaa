@@ -1,7 +1,4 @@
 
-        printf("\nAt time %d\n", ++time);
-        printf("Enter incoming packet size (0 to stop): ");
-        scanf("%d", &input_packet);
 
         if (input_packet == 0) break;
 
