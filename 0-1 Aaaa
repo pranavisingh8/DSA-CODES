@@ -1,8 +1,4 @@
 
-
-        if (input_packet == 0) break;
-
-        if (input_packet + storage > bucket_size) {
             printf("Packet overflow! Dropped: %d\n", input_packet + storage - bucket_size);
             storage = bucket_size;
         } else {
