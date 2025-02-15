@@ -1,60 +1,279 @@
-
-            printf("Packet overflow! Dropped: %d\n", input_packet + storage - bucket_size);
-            storage = bucket_size;
-        } else {
-            storage += input_packet;
-            printf("Packet added. Current storage: %d\n", storage);
+POISONOUS PLANT 
+class Result {
+    
+    
+    public static int poisonousPlants(List<Integer> p) {
+        if(p.size()<=1){
+            return 0;
         }
+        int count = 0;
 
-        if (storage >= output_rate) {
-            storage -= output_rate;
-            printf("Sent: %d, Remaining: %d\n", output_rate, storage);
-        } else {
-            printf("Sent: %d, Remaining: %d\n", storage, 0);
-            storage = 0;
+        List<ArrayList<Integer>> stackList = new ArrayList<>();
+        ArrayList<Integer> parentQueue = new ArrayList<>();
+        
+        stackList.add(parentQueue);
+        ArrayList<Integer> curStack = parentQueue;
+	parentQueue.add(p.get(0));
+
+        for(int i=1;i<p.size();i++){
+            if(p.get(i)<=p.get(i-1)){
+                curStack.add(p.get(i));
+            }else{
+                ArrayList<Integer> stack2 = new ArrayList<>();
+                stack2.add(p.get(i));
+                curStack = stack2;
+                stackList.add(stack2);
+            }
+        }
+        
+        while(stackList.size()>1){
+            count++;
+            
+            for(int i=stackList.size()-1;i>0;i--) {
+                ArrayList<Integer> list = stackList.get(i);
+                list.remove(0);
+                
+                if(list.isEmpty()) {
+                    stackList.remove(i);
+                }
+                else {
+                    ArrayList<Integer> prevList = stackList.get(i-1);
+                    if(prevList.get(prevList.size()-1) >= list.get(0)) {
+                        prevList.addAll(list);
+                        stackList.remove(i);
+                    }
+                }
+            }
+            
+        }
+        
+        return count;
+    }
+
+}
+
+TWO STRINGS
+class Result {
+    static String twoStrings(String s1, String s2){
+
+    Set<Character> s1Set = new HashSet<>();
+    Set<Character> s2Set = new HashSet<>();
+
+    //creating the set of string1
+    for(char c : s1.toCharArray()) {
+      s1Set.add(c);
+    }
+    //creating the set of string2
+    for(char c : s2.toCharArray()) {
+      s2Set.add(c);
+    }
+
+    // store the set intersection in s1Set
+    s1Set.retainAll(s2Set);
+
+    if (!s1Set.isEmpty())
+      return "YES";
+
+    return "NO";
+  }
+}
+
+TWO TWO
+import java.io.*;
+import java.math.BigInteger;
+
+class Trie {
+    Trie[] child;
+    boolean end;
+
+    Trie() {
+        child = new Trie[10];
+        end = false;
+    }
+
+    void insert(String s) {
+        Trie act = this;
+        for (int i = 0; i < s.length(); i++) {
+            int si = s.charAt(i) - '0';
+            if (act.child[si] == null) 
+                act.child[si] = new Trie();
+            act = act.child[si];
+        }
+        act.end = true;
+    }
+
+    int count(String s, int from) {
+        int res = 0;
+        Trie act = this;
+        for (int i = from; i < s.length(); i++) {
+            int si = s.charAt(i) - '0';
+            if (act.child[si] == null) 
+                return res;
+            act = act.child[si];
+            if (act.end) 
+                res++;
+        }
+        return res;
+    }
+}
+
+public class Solution {
+    BufferedReader in;
+    Trie root;
+
+    Solution() {
+        in = new BufferedReader(new InputStreamReader(System.in));
+        root = new Trie();
+        BigInteger pot = BigInteger.ONE;
+        for (int i = 0; i <= 800; i++) {
+            root.insert(pot.toString());
+            pot = pot.multiply(BigInteger.valueOf(2));
         }
     }
 
-    return 0;
+    void run() throws IOException {
+        int T = Integer.valueOf(in.readLine());
+        while (T-- > 0) {
+            long res = 0;
+            String s = in.readLine();
+            for (int i = 0; i < s.length(); i++) {
+                res += root.count(s, i);
+            }
+            System.out.println(res);
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        new Solution().run();
+    }
 }
 
-//url
+SELF DRIVING BUS:
 #include <bits/stdc++.h>
 using namespace std;
 
-int main() {
-    string url, protocol = "", host = "", port = "", path = "";
-    cout << "Enter a URL: ";
-    cin >> url;
+typedef long long LL;
+typedef pair<int, int> pii;
+double PI = acos(-1);
+double EPS = 1e-7;
+int INF = 1000000000;
+LL INFLL = 1000000000000000000LL;
 
-    size_t protocol_pos = url.find("://");
-    if (protocol_pos != string::npos) {
-        protocol = url.substr(0, protocol_pos);
-        url = url.substr(protocol_pos + 3);
-    }
+#define fi first
+#define se second
+#define mp make_pair
+#define pb push_back
+#define input(in) freopen(in, "r", stdin)
+#define output(out) freopen(out, "w", stdout)
+#define MIN(a, b) (a) = min((a), (b))
+#define MAX(a, b) (a) = max((a), (b))
+#define RESET(a, b) memset(a, b, sizeof(a))
+#define ALL(a) (a).begin(), (a).end()
+#define SIZE(a) (int)a.size()
+#define SORT(a) sort(ALL(a))
+#define UNIQUE(a) (a).erase(unique(ALL(a)), (a).end())
+#define FOR(a, b, c) for (int (a) = (b); (a) <= (c); (a)++)
+#define FORD(a, b, c) for (int (a) = (b); (a) >= (c); (a)--)
+#define FORIT(a, b) for (__typeof((b).begin()) a = (b).begin(); a != (b).end(); a++)
 
-    size_t port_pos = url.find(":");
-    size_t path_pos = url.find("/");
+int mx[8] = {-1, 1, 0, 0, -1, -1, 1, 1};
+int my[8] = {0, 0, -1, 1, -1, 1, -1, 1};
 
-    if (port_pos != string::npos) {
-        host = url.substr(0, port_pos);
-        if (path_pos != string::npos) {
-            port = url.substr(port_pos + 1, path_pos - port_pos - 1);
-            path = url.substr(path_pos + 1);
-        } else {
-            port = url.substr(port_pos + 1);
+int mins[20][200005];
+int maks[20][200005];
+int premx[20][200005];
+int premn[20][200005];
+vector<int> adj[200005];
+
+LL go(int lvl, int l, int r) {
+    if (l > r) return 0;
+    int m = (l + r) / 2;
+    queue<pair<int, int>> q;
+    q.push(mp(m, -1));
+    mins[lvl][m] = m;
+    maks[lvl][m] = m;
+    
+    while (!q.empty()) {
+        int u = q.front().fi;
+        int p = q.front().se;
+        q.pop();
+        
+        for (int v : adj[u]) {
+            if (v == p || v > r || v < l) continue;
+            maks[lvl][v] = max(maks[lvl][u], v);
+            mins[lvl][v] = min(mins[lvl][u], v);
+            q.push(mp(v, u));
         }
-    } else if (path_pos != string::npos) {
-        host = url.substr(0, path_pos);
-        path = url.substr(path_pos + 1);
-    } else {
-        host = url;
     }
+    
+    LL res = 0;
+    vector<int> pos;
+    
+    FOR(b, m + 1, r) {
+        maks[lvl][b] = max(maks[lvl][b - 1], maks[lvl][b]);
+        mins[lvl][b] = min(mins[lvl][b - 1], mins[lvl][b]);
+        if (maks[lvl][b] == b) pos.pb(b);
+    }
+    
+    FORD(b, m - 1, l) {
+        maks[lvl][b] = max(maks[lvl][b + 1], maks[lvl][b]);
+        mins[lvl][b] = min(mins[lvl][b + 1], mins[lvl][b]);
+    }
+    
+    FORD(a, m, l) {
+        if (mins[lvl][a] < a || mins[lvl][a] < 0 || maks[lvl][a] == INF) continue;
+        int cur = maks[lvl][a];
+        
+        if (max(maks[lvl][a], maks[lvl][cur]) == cur && min(mins[lvl][a], mins[lvl][cur]) == a) {
+            res++;
+        }
+        
+        int meh = upper_bound(pos.begin(), pos.end(), cur) - pos.begin();
+        
+        if (mins[lvl][a] == a) {
+            int l = meh, r = SIZE(pos) - 1, yo = meh - 1;
+            while (l <= r) {
+                int m = (l + r) / 2;
+                int cur = pos[m];
+                if (mins[lvl][cur] >= a) {
+                    yo = m;
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+            res += (yo - meh + 1);
+        } else {
+            FOR(b, meh, SIZE(pos) - 1) {
+                int cur = pos[b];
+                if (min(mins[lvl][a], mins[lvl][cur]) == a) res++;
+            }
+        }
+    }
+    
+    return res + go(lvl + 1, l, m - 1) + go(lvl + 1, m + 1, r);
+}
 
-    cout << "Protocol: " << protocol << endl;
-    cout << "Host/Domain: " << host << endl;
-    cout << "Port: " << port << endl;
-    cout << "Path: " << path << endl;
-
+int main() {
+    int n;
+    scanf("%d", &n);
+    
+    FOR(a, 0, 19) {
+        FOR(b, 0, n - 1) {
+            mins[a][b] = -INF;
+            maks[a][b] = INF;
+        }
+    }
+    
+    FOR(a, 1, n - 1) {
+        int u, v;
+        scanf("%d%d", &u, &v);
+        u--;
+        v--;
+        adj[u].pb(v);
+        adj[v].pb(u);
+    }
+    
+    cout << go(0, 0, n - 1) << endl;
     return 0;
 }
