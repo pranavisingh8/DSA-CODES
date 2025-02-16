@@ -78,9 +78,27 @@ class Result {
   }
 }
 
-TWO TWO
-import java.io.*;
-import java.math.BigInteger;
+class Result {
+    static Trie root = new Trie();
+
+    static {
+        // Precompute all powers of 2 up to 2^800 and store them in Trie
+
+        BigInteger pot = BigInteger.ONE;
+        for (int i = 0; i <= 800; i++) {
+            root.insert(pot.toString());
+            pot = pot.multiply(BigInteger.valueOf(2));
+        }
+    }
+
+    public static int twoTwo(String a) {
+        int res = 0;
+        for (int i = 0; i < a.length(); i++) {
+            res += root.count(a, i);
+        }
+        return res;
+    }
+}
 
 class Trie {
     Trie[] child;
@@ -114,37 +132,6 @@ class Trie {
                 res++;
         }
         return res;
-    }
-}
-
-public class Solution {
-    BufferedReader in;
-    Trie root;
-
-    Solution() {
-        in = new BufferedReader(new InputStreamReader(System.in));
-        root = new Trie();
-        BigInteger pot = BigInteger.ONE;
-        for (int i = 0; i <= 800; i++) {
-            root.insert(pot.toString());
-            pot = pot.multiply(BigInteger.valueOf(2));
-        }
-    }
-
-    void run() throws IOException {
-        int T = Integer.valueOf(in.readLine());
-        while (T-- > 0) {
-            long res = 0;
-            String s = in.readLine();
-            for (int i = 0; i < s.length(); i++) {
-                res += root.count(s, i);
-            }
-            System.out.println(res);
-        }
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Solution().run();
     }
 }
 
