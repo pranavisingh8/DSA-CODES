@@ -1,6 +1,4 @@
 
-
-            int n = Integer.parseInt(br.readLine());
             for (int i = 0; i < n; i++) {
                 String s = br.readLine();
                 for (int j = 0; j < s.length(); j++) {
