@@ -1,6 +1,4 @@
 
-            for (int i = 0; i < n; i++) {
-                String s = br.readLine();
                 for (int j = 0; j < s.length(); j++) {
                     t.add(s.substring(j, s.length()));
                 }
