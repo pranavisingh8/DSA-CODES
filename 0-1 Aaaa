@@ -1,6 +1,4 @@
-              
-            Object[] suffix1 = t.toArray();
-            String[] suffix = new String[suffix1.length];
+
 
             for (int l = 0; l < suffix.length; l++) {
                 suffix[l] = (String) suffix1[l];
