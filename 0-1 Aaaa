@@ -1,10 +1,5 @@
 
 
-            for (int l = 0; l < suffix.length; l++) {
-                suffix[l] = (String) suffix1[l];
-                // System.out.println(suffix[l]);
-            }
-
             int[] len = new int[suffix.length];
             int[] lcp = new int[suffix.length];
 
