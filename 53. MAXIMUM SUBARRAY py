@@ -4,6 +4,6 @@ class Solution:
         ans = cur_sum = nums[0]
         for num in nums[1:]:
             cur_sum = max(num, cur_sum + num)
-            ans = max(max_sum, cur_sum)
+            ans = max(ans, cur_sum)
         return ans
         
