@@ -1,0 +1,20 @@
+✅ Problem Summary:
+You're given a list of email IDs (represented as integers).
+
+If any ID occurs more than once, only one should be kept — the rest should be deleted.
+
+You need to count the number of deletions required.
+
+✅ Your Code:
+python:
+
+def countDuplicate(numbers):
+    c = 0
+    for i in set(numbers):  # Go through each unique number
+        if numbers.count(i) > 1:  # If a number occurs more than once
+            c += numbers.count(i) - 1  # Add (count - 1) to deletions
+    return c
+
+n = int(input())
+numbers = list(map(int, input().split()))
+print(countDuplicate(numbers))
