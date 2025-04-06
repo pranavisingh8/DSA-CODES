@@ -1,0 +1,20 @@
+MERGE K SORTED LINKED LISTS
+
+
+import heapq
+
+def mergeKSortedArrays(kArrays, k:int):
+	# Write your code here.
+	# kArrays is a list of 'k' lists.
+	# Return a list.
+	heap=[]
+	res=[]
+
+	for arr in kArrays:
+		for num in arr:
+			heapq.heappush(heap,num)
+
+	while heap:
+		res.append(heapq.heappop(heap))
+
+	return res
