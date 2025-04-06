@@ -1,0 +1,13 @@
+268. Missing Number
+
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        s1=s2=0
+        for i in range(len(nums)):
+            s1 +=nums[i]
+
+        for j in range(len(nums)+1):
+            s2 += j
+
+        return s2-s1
+        
