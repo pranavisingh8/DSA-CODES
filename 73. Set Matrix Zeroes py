@@ -1,0 +1,24 @@
+73. Set Matrix Zeroes
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        if not matrix:
+            return []
+        row,col= len(matrix), len(matrix[0])
+        z_r,z_c = [False] * row, [False] * col
+        for r in range(row):
+            for c in range(col):
+                if matrix[r][c]==0:
+                    z_r[r]=True
+                    z_c[c]=True
+            
+        for r in range(row):
+            for c in range(col):
+                if z_r[r] or z_c[c]:
+                    matrix[r][c]=0
+        
+            
+        
