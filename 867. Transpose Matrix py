@@ -1,0 +1,11 @@
+867. Transpose Matrix
+
+class Solution:
+    def transpose(self, matrix: List[List[int]]) -> List[List[int]]:
+        # method 1: return list(zip(*matrix))
+        #method 2 :
+        row,col= len(matrix), len(matrix[0])
+        grid=[[0] * row for _ in range(col)]
+        for n in range(row*col):
+            grid[n % col][n // col]= matrix[n // col][n % col]
+        return grid
