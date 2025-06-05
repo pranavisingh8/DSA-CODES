@@ -1,6 +1,3 @@
-
-
-            int[] len = new int[suffix.length];
             int[] lcp = new int[suffix.length];
 
             len[0] = suffix[0].length();
