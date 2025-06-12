@@ -1,5 +1,3 @@
-            len[0] = suffix[0].length();
-            lcp[0] = 0;
 
             for (int j = 1; j < suffix.length; j++) {
                 int count = 0;
