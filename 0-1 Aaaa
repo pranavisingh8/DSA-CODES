@@ -1,6 +1,4 @@
 
-            for (int j = 1; j < suffix.length; j++) {
-                int count = 0;
                 try {
                     while (true) {
                         if (suffix[j - 1].charAt(count) == suffix[j].charAt(count)) {
