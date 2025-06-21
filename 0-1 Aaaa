@@ -1,18 +1,4 @@
 
-                try {
-                    while (true) {
-                        if (suffix[j - 1].charAt(count) == suffix[j].charAt(count)) {
-                            count++;
-                        } else {
-                            break;
-                        }
-                    }
-                } catch (StringIndexOutOfBoundsException e) {
-                }
-                len[j] = suffix[j].length() - count;
-                lcp[j] = count;
-            }
-
             int q = Integer.parseInt(br.readLine());
             for (int i = 0; i < q; i++) {
                 int a = Integer.parseInt(br.readLine());
