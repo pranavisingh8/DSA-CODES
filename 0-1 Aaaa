@@ -1,8 +1,3 @@
-                try {
-                    while (j < a) {
-                        a1 = j;
-                        j = j + len[count++];
-                    }
                     count--;
                     System.out.println(suffix[count].substring(0, lcp[count] + a - a1));
                 } catch (ArrayIndexOutOfBoundsException e) {
