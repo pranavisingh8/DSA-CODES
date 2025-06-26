@@ -1,5 +1,3 @@
-
-                    System.out.println(suffix[count].substring(0, lcp[count] + a - a1));
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println("INVALID");
                 }
