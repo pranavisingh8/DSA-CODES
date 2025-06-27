@@ -1,5 +1,4 @@
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("INVALID");
+
                 }
             }
         } catch (IOException e) {
