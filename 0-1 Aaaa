@@ -1,6 +1,3 @@
-POISONOUS PLANT 
-import java.util.*;
-
 public class PoisonousPlants {
     public static int poisonousPlants(List<Integer> p) {
         if (p.size() <= 1) return 0;
