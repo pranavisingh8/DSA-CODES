@@ -1,5 +1,3 @@
-        
-        int count = 0;
         List<ArrayList<Integer>> stackList = new ArrayList<>();
         ArrayList<Integer> parentQueue = new ArrayList<>();
         
