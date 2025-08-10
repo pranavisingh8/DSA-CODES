@@ -1,4 +1,5 @@
         List<ArrayList<Integer>> stackList = new ArrayList<>();
+
         ArrayList<Integer> parentQueue = new ArrayList<>();
         
         stackList.add(parentQueue);
