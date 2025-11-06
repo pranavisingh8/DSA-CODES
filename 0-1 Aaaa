@@ -1,4 +1,4 @@
-ass2.l
+############ass2.l
 %{
 #include <stdio.h>
 #include <string.h>
@@ -60,6 +60,191 @@ int main() {
     printf("Total Lines      : %d\n", lineCount);
     printf("Total Spaces     : %d\n", spaceCount);
 
+    return 0;
+}
+
+
+##################a5.l:
+%{
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
+%%
+[0-9]+    {
+              long num = atol(yytext);
+              printf("Decimal: %ld\tHexadecimal: %lX\n", num, num);
+           }
+[ \t\n]+   ;
+.          ;
+%%
+int yywrap() {return 1;}
+int main() {
+    yylex();
+    return 0;
+}
+
+###############pos.l:
+%{
+#include "y.tab.h"
+%}
+
+%%
+[0-9]+    { yylval = atoi(yytext); return ID; }
+[+\-*/]   { return yytext[0]; }
+[ \t\n]   ;
+.         ;
+%%
+
+##################pos.y:
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+
+void push(int val);
+int pop(void);
+int top(void);
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token ID
+
+%%
+S : E { printf("= %d\n", top()); }
+;
+
+E : E E '+' { push(pop() + pop()); }
+  | E E '-' { int temp = pop(); push(pop() - temp); }
+  | E E '*' { push(pop() * pop()); }
+  | E E '/' { int temp = pop(); push(pop() / temp); }
+  | ID      { push(yylval); }
+;
+%%
+
+int st[100], i = 0;
+
+void push(int val) { assert(i < 100); st[i++] = val; }
+int pop(void) { assert(i > 0); return st[--i]; }
+int top(void) { assert(i > 0); return st[i-1]; }
+
+void yyerror(const char *s) { fprintf(stderr, "Error: %s\n", s); }
+
+int main(void) { return yyparse(); }
+
+
+##############ic.l:
+%{
+#include "ic.tab.h"
+%}
+
+%%
+
+[0-9]+              { yylval.ival = atoi(yytext); return NUMBER; }
+[a-zA-Z_][a-zA-Z0-9_]* { yylval.sval = strdup(yytext); return ID; }
+"+"                 { return '+'; }
+"-"                 { return '-'; }
+"*"                 { return '*'; }
+"/"                 { return '/'; }
+"="                 { return '='; }
+"("                 { return '('; }
+")"                 { return ')'; }
+";"                 { return ';'; }
+"\n"                { return '\n'; }
+[ \t]+              { }
+.                   { printf("Unknown character: %s\n", yytext); }
+
+%%
+
+int yywrap() { return 1; }
+
+##############ic.y:
+%{
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int tempCount = 0;
+char tempName[10];
+
+int yylex();
+void yyerror(const char *s);
+
+char* newTemp() {
+    sprintf(tempName, "t%d", tempCount++);
+    return strdup(tempName);
+}
+%}
+
+%union {
+    char* sval;
+    int ival;
+}
+
+%token <sval> ID
+%token <ival> NUMBER
+
+%right '='      // assignment has lowest precedence
+%left '+' '-'
+%left '*' '/'
+%type <sval> expr
+
+%%
+
+program:
+    /* one or more expressions separated by newline or semicolon */
+    expr_list
+;
+
+expr_list:
+    expr '\n'    { printf("Final Result: %s\n", $1); }
+  | expr_list expr '\n' { printf("Final Result: %s\n", $2); }
+  ;
+
+expr:
+    ID '=' expr {
+        printf("%s = %s\n", $1, $3);
+        $$ = $1;      // result is the variable name
+    }
+  | expr '+' expr {
+        char* t = newTemp();
+        printf("%s = %s + %s\n", t, $1, $3);
+        $$ = t;
+    }
+  | expr '-' expr {
+        char* t = newTemp();
+        printf("%s = %s - %s\n", t, $1, $3);
+        $$ = t;
+    }
+  | expr '*' expr {
+        char* t = newTemp();
+        printf("%s = %s * %s\n", t, $1, $3);
+        $$ = t;
+    }
+  | expr '/' expr {
+        char* t = newTemp();
+        printf("%s = %s / %s\n", t, $1, $3);
+        $$ = t;
+    }
+  | '(' expr ')' { $$ = $2; }
+  | ID          { $$ = $1; }     // bare variable: just return name
+  | NUMBER {
+        char* t = newTemp();
+        printf("%s = %d\n", t, $1);
+        $$ = t;
+    }
+;
+
+%%
+
+void yyerror(const char *s) {
+    fprintf(stderr, "Syntax Error: %s\n", s);
+}
+
+int main() {
+    printf("Enter arithmetic expression:\n");
+    while (!feof(stdin)) yyparse();
     return 0;
 }
 
