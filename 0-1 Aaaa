@@ -1,1 +1,66 @@
-hiutrs
+ass2.l
+%{
+#include <stdio.h>
+#include <string.h>
+
+int commentCount = 0, keywordCount = 0, identifierCount = 0;
+int wordCount = 0, lineCount = 0, spaceCount = 0;
+
+char *keywords[] = {
+    "int", "float", "if", "else", "void", "char", "double",
+    "for", "while", "return","main"
+};
+int keywordTotal = 11;
+
+int isKeyword(char *token) {
+    for (int i = 0; i < keywordTotal; i++) {
+        if (strcmp(keywords[i], token) == 0)
+            return 1;
+    }
+    return 0;
+}
+%}
+
+%%
+\/\/[^\n]*               { commentCount++; }
+\/\*([^*]|\*+[^*/])*\*\/ {
+    for (int i = 0; i < yyleng; i++)
+        if (yytext[i] == '\n') lineCount++;
+    commentCount++;
+}
+
+\'([^\\\n]|(\\.))\'    { /* it's a character literal like 'A' - ignore it */ }
+
+[a-zA-Z_][a-zA-Z0-9_]* {
+    wordCount++;
+    if (isKeyword(yytext))
+        keywordCount++;
+    else
+        identifierCount++;
+}
+
+
+[ \t]+                   { spaceCount += yyleng; }
+
+\n                       { lineCount++; }
+
+.                        { }
+
+%%
+
+int yywrap() { return 1; }
+
+int main() {
+    yylex();
+
+    printf("Total Comments   : %d\n", commentCount);
+    printf("Total Keywords   : %d\n", keywordCount);
+    printf("Total Identifiers: %d\n", identifierCount);
+    printf("Total Words      : %d\n", wordCount);
+    printf("Total Lines      : %d\n", lineCount);
+    printf("Total Spaces     : %d\n", spaceCount);
+
+    return 0;
+}
+
+
