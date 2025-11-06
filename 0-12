@@ -1,1 +1,81 @@
+SPACES:
+
+
+TOKEN:
+
+
+FREQ:
+
+
+DEC TO BINARY:
+%{
+#include <stdio.h>
+#include <stdlib.h>
+
+void dec_to_bin(long n) {
+    if (n == 0) {
+        printf("0");
+        return;
+    }
+    int binary[64], i = 0;
+    while (n > 0) {
+        binary[i++] = n % 2;
+        n /= 2;
+    }
+    for (int j = i - 1; j >= 0; j--)
+        printf("%d", binary[j]);
+}
+%}
+
+%%
+[0-9]+    {
+              long num = atol(yytext);
+              printf("Decimal: %ld\tBinary: ", num);
+              dec_to_bin(num);
+              printf("\n");
+           }
+[ \t\n]+   ;
+.          ;
+%%
+int yywrap() {return 1;}
+int main() {
+    yylex();
+    return 0;
+}
+
+HEX TO DEC:
+%{
+#include <stdio.h>
+#include <stdlib.h>
+
+void hex_to_decimal(const char *text) {
+    long decimal = strtol(text, NULL, 16);
+    printf("Hex: %s\tDecimal: %ld\n", text, decimal);
+}
+%}
+
+%%
+
+[0-9a-fA-F]+   { hex_to_decimal(yytext); }
+
+
+[ \t\n]+       ;
+.              ;
+%%
+
+int main() {
+    yylex();  // Start scanning input
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}
+
+INFIX TO POSTFIX.y:
+infix.y:
+
+
+
+Programming constructs:
 
